@@ -78,7 +78,15 @@ qmltypes.extra = $$[QT_INSTALL_BINS]/qmlplugindump -notrelocatable Bacon2D $$API
 qmltypes.files += $$OUT_PWD/imports/Bacon2D/plugins.qmltypes
 export(qmltypes.files)
 
-qmlplugin.commands = $$QMAKE_COPY $$QMLFILES $$OUT_PWD/imports/Bacon2D/
+win32-g++ {
+    QMAKE_CXXFLAGS+=-fno-strict-aliasing
+}
+
+win32 {
+    qmlplugin.commands = cmd /c "for %I in ($$shell_path($$QMLFILES)) do $$QMAKE_COPY %I $$shell_path($$OUT_PWD/imports/Bacon2D/)"
+} else {
+    qmlplugin.commands = $$QMAKE_COPY $$shell_path($$QMLFILES) $$shell_path($$OUT_PWD/imports/Bacon2D/)
+}
 qmlplugin.path = $$target.path
 
 qmlpluginfiles.depends += qmlplugin

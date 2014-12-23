@@ -47,11 +47,11 @@ void Sprite::append_animation(QQmlListProperty<SpriteAnimation> *list, SpriteAni
  */
 Sprite::Sprite(QQuickItem *parent)
     : QQuickItem(parent)
-    , m_entity(0)
     , m_stateMachine(0)
     , m_stateGroup(0)
     , m_verticalMirror(false)
     , m_horizontalMirror(false)
+    , m_entity(0)
 {
 }
 
